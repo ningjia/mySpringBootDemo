@@ -11,10 +11,10 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'war' //在build的时候打成war包(生成在/bulid/libs/目录下)
 
-version = '0.0.1-SNAPSHOT'
+//version = '1'
 sourceCompatibility = 1.8
 
 repositories {
@@ -25,4 +25,6 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+    //ensure that the embedded servlet container doesn’t interfere with the servlet container to which the war file will be deployed
+	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 }
