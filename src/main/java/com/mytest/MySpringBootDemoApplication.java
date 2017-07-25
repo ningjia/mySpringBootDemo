@@ -1,0 +1,29 @@
+package com.mytest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@SpringBootApplication
+public class MySpringBootDemoApplication {
+
+	@Value(value = "${app.name}")
+	private String appNme;
+
+	@Autowired
+	private Book book;
+
+	public static void main(String[] args) {
+		SpringApplication.run(MySpringBootDemoApplication.class, args);
+	}
+
+	@RequestMapping(value = "/",produces = "text/plain;charset=UTF-8")
+	String index(){
+//		return "Hello, This is Spring Boot Demo!";
+		return "Hello Spring Boot! App_Name="+appNme+" The BookName is "+book.getName()+";and Book Author is "+book.getAuthor()+";and Book price is "+book.getPrice();
+	}
+}
